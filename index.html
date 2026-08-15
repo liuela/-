@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Secure TikTok Link</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 25px;
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #b3b3b3;
+            margin-bottom: 30px;
+        }
+
+        .click-btn {
+            background: linear-gradient(45deg, #fe2c55, #ff0050);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(254, 44, 85, 0.4);
+            transition: transform 0.1s ease, opacity 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .click-btn:active {
+            transform: scale(0.96);
+            opacity: 0.9;
+        }
+
+        /* Custom Mobile Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #1e1e2f;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-box h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .modal-box p {
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .modal-input:focus {
+            border-color: #fe2c55;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .modal-btn.cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: #b3b3b3;
+        }
+
+        .modal-btn.submit {
+            background: #fe2c55;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Exclusive Content</h2>
+        <p>Tap the button below and enter the password to view.</p>
+        <button class="click-btn" onclick="openModal()">Click Me</button>
+    </div>
+
+    <!-- Custom Modal for Password Input -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal-box">
+            <h3>Enter Password</h3>
+            <p>Type the correct password to proceed.</p>
+            <input type="password" id="modalInput" class="modal-input" placeholder="Enter password...">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn submit" onclick="submitPassword()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set your strong password here
+        const correctPassword = "hello_world123";
+        
+        // Your TikTok video link
+        const tiktokUrl = "https://vt.tiktok.com/ZSVL8yN1C/";
+
+        function openModal() {
+            document.getElementById("modalInput").value = "";
+            document.getElementById("passwordModal").classList.add("active");
+            document.getElementById("modalInput").focus();
+        }
+
+        function closeModal() {
+            document.getElementById("passwordModal").classList.remove("active");
+        }
+
+        function submitPassword() {
+            let userInput = document.getElementById("modalInput").value;
+
+            if (userInput === correctPassword) {
+                closeModal();
+                window.location.href = tiktokUrl;
+            } else {
+                alert("Incorrect password! Access denied.");
+                closeModal();
+            }
+        }
+
+        // Allow pressing 'Enter' key to submit
+        document.getElementById("modalInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                submitPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
