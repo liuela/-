@@ -1,223 +1,883 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Secure TikTok Link</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Promax XO</title>
 
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px 25px;
-            text-align: center;
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    color:white;
+    background:
+        radial-gradient(circle at 15% 15%,#172554,transparent 35%),
+        radial-gradient(circle at 85% 85%,#312e81,transparent 35%),
+        #050816;
+}
 
-        h2 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
+.screen{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
 
-        p {
-            font-size: 14px;
-            color: #b3b3b3;
-            margin-bottom: 30px;
-        }
+.hidden{
+    display:none!important;
+}
 
-        .click-btn {
-            background: linear-gradient(45deg, #fe2c55, #ff0050);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(254, 44, 85, 0.4);
-            transition: transform 0.1s ease, opacity 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
+/* START */
 
-        .click-btn:active {
-            transform: scale(0.96);
-            opacity: 0.9;
-        }
+.card{
+    width:min(430px,94vw);
+    padding:42px 28px;
+    text-align:center;
+    border-radius:28px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(20px);
+    box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
 
-        /* Custom Mobile Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
-            padding: 20px;
-        }
+.logo{
+    width:92px;
+    height:92px;
+    margin:0 auto 22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:25px;
+    font-size:43px;
+    background:linear-gradient(135deg,#00e5ff,#7c4dff);
+    box-shadow:0 0 45px rgba(0,229,255,.3);
+}
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
 
-        .modal-box {
-            background: #1e1e2f;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 24px;
-            width: 100%;
-            max-width: 320px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
+.subtitle{
+    color:#aab4d0;
+    line-height:1.6;
+    margin-bottom:30px;
+}
 
-        .modal-overlay.active .modal-box {
-            transform: translateY(0);
-        }
+.primary-btn{
+    width:100%;
+    padding:17px;
+    border:0;
+    border-radius:15px;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(135deg,#00c6ff,#7c4dff);
+    box-shadow:0 10px 35px rgba(0,198,255,.2);
+    transition:.2s;
+}
 
-        .modal-box h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
+.primary-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(124,77,255,.35);
+}
 
-        .modal-box p {
-            font-size: 13px;
-            margin-bottom: 16px;
-        }
+/* PASSWORD */
 
-        .modal-input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            outline: none;
-            margin-bottom: 16px;
-            text-align: center;
-        }
+.password-card{
+    width:min(400px,94vw);
+    padding:35px 28px;
+    text-align:center;
+    border-radius:26px;
+    background:rgba(8,13,32,.92);
+    border:1px solid #29355d;
+    box-shadow:0 25px 70px rgba(0,0,0,.5);
+}
 
-        .modal-input:focus {
-            border-color: #fe2c55;
-        }
+.small-logo{
+    width:70px;
+    height:70px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    font-size:32px;
+    background:linear-gradient(135deg,#00e5ff,#7c4dff);
+}
 
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-        }
+.password-card h2{
+    margin-bottom:10px;
+}
 
-        .modal-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-        }
+.password-card p{
+    color:#8994b4;
+    margin-bottom:22px;
+}
 
-        .modal-btn.cancel {
-            background: rgba(255, 255, 255, 0.1);
-            color: #b3b3b3;
-        }
+input{
+    width:100%;
+    padding:16px;
+    border-radius:13px;
+    border:1px solid #344064;
+    outline:none;
+    background:#080d20;
+    color:white;
+    text-align:center;
+    font-size:16px;
+    margin-bottom:12px;
+}
 
-        .modal-btn.submit {
-            background: #fe2c55;
-            color: white;
-        }
-    </style>
+input:focus{
+    border-color:#00e5ff;
+    box-shadow:0 0 15px rgba(0,229,255,.12);
+}
+
+.error{
+    height:22px;
+    color:#ff5577;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+/* GAME */
+
+.game-screen{
+    flex-direction:column;
+}
+
+.game-top{
+    width:min(430px,94vw);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.game-title{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.turn{
+    padding:8px 13px;
+    border-radius:12px;
+    background:rgba(255,255,255,.08);
+    color:#b9c5e5;
+    font-size:14px;
+}
+
+.board{
+    width:min(390px,88vw);
+    aspect-ratio:1/1;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    padding:10px;
+    border-radius:25px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 20px 70px rgba(0,0,0,.4);
+}
+
+.cell{
+    border:0;
+    border-radius:18px;
+    background:#0b1128;
+    color:white;
+    font-size:clamp(45px,15vw,80px);
+    font-weight:bold;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.cell:hover:not(.used){
+    background:#121b3d;
+    transform:scale(.97);
+}
+
+.cell.x{
+    color:#00e5ff;
+    text-shadow:0 0 25px rgba(0,229,255,.6);
+}
+
+.cell.o{
+    color:#c084fc;
+    text-shadow:0 0 25px rgba(192,132,252,.6);
+}
+
+.cell.win{
+    animation:winning .7s infinite alternate;
+}
+
+@keyframes winning{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.06);
+        box-shadow:0 0 30px rgba(0,229,255,.4);
+    }
+}
+
+.status{
+    margin-top:17px;
+    color:#aab4d0;
+    text-align:center;
+}
+
+.reset-btn{
+    margin-top:15px;
+    padding:11px 20px;
+    border-radius:12px;
+    border:1px solid #303d68;
+    background:rgba(255,255,255,.05);
+    color:white;
+    cursor:pointer;
+}
+
+/* WIN */
+
+.win-card{
+    width:min(450px,94vw);
+    padding:45px 28px;
+    text-align:center;
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14);
+    backdrop-filter:blur(20px);
+}
+
+.trophy{
+    font-size:82px;
+    animation:trophy .8s infinite alternate;
+}
+
+@keyframes trophy{
+    from{
+        transform:translateY(0) rotate(-3deg);
+    }
+    to{
+        transform:translateY(-12px) rotate(3deg);
+    }
+}
+
+.win-card h2{
+    font-size:38px;
+    margin:15px 0 10px;
+}
+
+.celebrate-btn{
+    width:100%;
+    margin-top:25px;
+    padding:17px;
+    border:0;
+    border-radius:15px;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff4081,#7c4dff);
+    box-shadow:0 10px 35px rgba(255,64,129,.2);
+}
+
+/* CONFETTI */
+
+.confetti{
+    position:fixed;
+    top:-30px;
+    z-index:100;
+    pointer-events:none;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="card">
-        <h2>Exclusive Content</h2>
-        <p>Tap the button below and enter the password to view.</p>
-        <button class="click-btn" onclick="openModal()">Click Me</button>
+<!-- START SCREEN -->
+
+<section id="startScreen" class="screen">
+
+<div class="card">
+
+    <div class="logo">❌⭕</div>
+
+    <h1>Promax XO</h1>
+
+    <p class="subtitle">
+        Think fast. Make your move.
+        Beat the challenge and unlock the celebration.
+    </p>
+
+    <button class="primary-btn" onclick="openPassword()">
+        🚀 START CHALLENGE
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- PASSWORD SCREEN -->
+
+<section id="passwordScreen" class="screen hidden">
+
+<div class="password-card">
+
+    <div class="small-logo">🔐</div>
+
+    <h2>Private Challenge</h2>
+
+    <p>
+        Enter the password to unlock Promax XO.
+    </p>
+
+    <input
+        id="passwordInput"
+        type="password"
+        placeholder="Enter password"
+        autocomplete="off"
+        onkeydown="if(event.key==='Enter')checkPassword()"
+    >
+
+    <div id="passwordError" class="error"></div>
+
+    <button class="primary-btn" onclick="checkPassword()">
+        🔓 UNLOCK GAME
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- GAME SCREEN -->
+
+<section id="gameScreen" class="screen game-screen hidden">
+
+<div class="game-top">
+
+    <div class="game-title">
+        ❌⭕ Promax XO
     </div>
 
-    <!-- Custom Modal for Password Input -->
-    <div class="modal-overlay" id="passwordModal">
-        <div class="modal-box">
-            <h3>Enter Password</h3>
-            <p>Type the correct password to proceed.</p>
-            <input type="password" id="modalInput" class="modal-input" placeholder="Enter password...">
-            <div class="modal-actions">
-                <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
-                <button class="modal-btn submit" onclick="submitPassword()">Submit</button>
-            </div>
-        </div>
+    <div id="turnText" class="turn">
+        Your turn
     </div>
 
-    <script>
-        // Set your strong password here
-        const correctPassword = "hello_world123";
-        
-        // Your TikTok video link
-        const tiktokUrl = "https://vt.tiktok.com/ZSVL8yN1C/";
+</div>
 
-        function openModal() {
-            document.getElementById("modalInput").value = "";
-            document.getElementById("passwordModal").classList.add("active");
-            document.getElementById("modalInput").focus();
-        }
+<div id="board" class="board"></div>
 
-        function closeModal() {
-            document.getElementById("passwordModal").classList.remove("active");
-        }
+<div id="status" class="status">
+    You are ❌
+</div>
 
-        function submitPassword() {
-            let userInput = document.getElementById("modalInput").value;
+<button class="reset-btn" onclick="restartGame()">
+    ↻ Restart Game
+</button>
 
-            if (userInput === correctPassword) {
-                closeModal();
-                window.location.href = tiktokUrl;
-            } else {
-                alert("Incorrect password! Access denied.");
-                closeModal();
+</section>
+
+
+<!-- WIN SCREEN -->
+
+<section id="winScreen" class="screen hidden">
+
+<div class="win-card">
+
+    <div class="trophy">🏆</div>
+
+    <h2>You Won!</h2>
+
+    <p class="subtitle">
+        Amazing! You defeated the XO challenge.
+    </p>
+
+    <button
+        class="celebrate-btn"
+        onclick="celebrateAndRedirect()"
+    >
+        🎉 CLICK & CELEBRATE
+    </button>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* ==============================
+   SETTINGS
+============================== */
+
+const PASSWORD="promax123";
+
+const TIKTOK_URL=
+"https://vt.tiktok.com/ZSVN5nW1U/";
+
+
+/* ==============================
+   ELEMENTS
+============================== */
+
+const startScreen=
+document.getElementById("startScreen");
+
+const passwordScreen=
+document.getElementById("passwordScreen");
+
+const gameScreen=
+document.getElementById("gameScreen");
+
+const winScreen=
+document.getElementById("winScreen");
+
+const boardElement=
+document.getElementById("board");
+
+const statusElement=
+document.getElementById("status");
+
+const turnElement=
+document.getElementById("turnText");
+
+
+/* ==============================
+   PASSWORD
+============================== */
+
+function openPassword(){
+
+    startScreen.classList.add("hidden");
+
+    passwordScreen.classList.remove("hidden");
+
+    setTimeout(()=>{
+        document
+        .getElementById("passwordInput")
+        .focus();
+    },100);
+}
+
+
+function checkPassword(){
+
+    const input=
+    document.getElementById("passwordInput");
+
+    const error=
+    document.getElementById("passwordError");
+
+    if(input.value===PASSWORD){
+
+        error.textContent="";
+
+        passwordScreen.classList.add("hidden");
+
+        gameScreen.classList.remove("hidden");
+
+        startGame();
+
+    }else{
+
+        error.textContent=
+        "❌ Wrong password";
+
+        input.value="";
+
+        input.animate(
+            [
+                {transform:"translateX(-8px)"},
+                {transform:"translateX(8px)"},
+                {transform:"translateX(-5px)"},
+                {transform:"translateX(0)"}
+            ],
+            {
+                duration:300
             }
+        );
+    }
+}
+
+
+/* ==============================
+   GAME
+============================== */
+
+let board=[];
+let gameActive=true;
+
+const HUMAN="X";
+const COMPUTER="O";
+
+const winningCombinations=[
+
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+
+    [0,4,8],
+    [2,4,6]
+
+];
+
+
+function startGame(){
+
+    board=[
+        "","","",
+        "","","",
+        "","",""
+    ];
+
+    gameActive=true;
+
+    renderBoard();
+
+    statusElement.textContent=
+    "Your turn — choose a square.";
+
+    turnElement.textContent=
+    "Your turn";
+}
+
+
+function renderBoard(){
+
+    boardElement.innerHTML="";
+
+    board.forEach((value,index)=>{
+
+        const cell=
+        document.createElement("button");
+
+        cell.className="cell";
+
+        if(value){
+
+            cell.textContent=value;
+
+            cell.classList.add(
+                value==="X"?"x":"o"
+            );
+
+            cell.classList.add("used");
         }
 
-        // Allow pressing 'Enter' key to submit
-        document.getElementById("modalInput").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                submitPassword();
-            }
+        cell.onclick=()=>{
+            playerMove(index);
+        };
+
+        boardElement.appendChild(cell);
+    });
+}
+
+
+/* ==============================
+   PLAYER
+============================== */
+
+function playerMove(index){
+
+    if(!gameActive)return;
+
+    if(board[index]!=="")return;
+
+    board[index]=HUMAN;
+
+    renderBoard();
+
+    const result=checkWinner();
+
+    if(result){
+
+        finishGame(result);
+
+        return;
+    }
+
+    turnElement.textContent=
+    "Computer thinking...";
+
+    statusElement.textContent=
+    "🤖 Computer is thinking...";
+
+    setTimeout(computerMove,350);
+}
+
+
+/* ==============================
+   EASY COMPUTER
+============================== */
+
+function computerMove(){
+
+    if(!gameActive)return;
+
+    const available=
+    board
+    .map((value,index)=>
+        value===""?index:null
+    )
+    .filter(index=>index!==null);
+
+
+    if(available.length===0){
+
+        finishGame("draw");
+
+        return;
+    }
+
+
+    /*
+       EASY MODE
+
+       The computer chooses
+       completely randomly.
+
+       It does NOT block you.
+    */
+
+    const move=
+    available[
+        Math.floor(
+            Math.random()*available.length
+        )
+    ];
+
+
+    board[move]=COMPUTER;
+
+    renderBoard();
+
+    const result=checkWinner();
+
+    if(result){
+
+        finishGame(result);
+
+        return;
+    }
+
+
+    turnElement.textContent=
+    "Your turn";
+
+    statusElement.textContent=
+    "Your turn — choose a square.";
+}
+
+
+/* ==============================
+   WIN CHECK
+============================== */
+
+function checkWinner(){
+
+    for(
+        const combination
+        of winningCombinations
+    ){
+
+        const[a,b,c]=combination;
+
+        if(
+            board[a] &&
+            board[a]===board[b] &&
+            board[a]===board[c]
+        ){
+
+            return{
+                winner:board[a],
+                combination:combination
+            };
+        }
+    }
+
+
+    if(
+        board.every(
+            cell=>cell!==""
+        )
+    ){
+
+        return"draw";
+    }
+
+
+    return null;
+}
+
+
+/* ==============================
+   FINISH
+============================== */
+
+function finishGame(result){
+
+    gameActive=false;
+
+
+    if(result==="draw"){
+
+        statusElement.textContent=
+        "🤝 Draw!";
+
+        setTimeout(()=>{
+            startGame();
+        },700);
+
+        return;
+    }
+
+
+    if(result.combination){
+
+        const cells=
+        boardElement.children;
+
+        result.combination.forEach(index=>{
+
+            cells[index]
+            .classList.add("win");
+
         });
-    </script>
+    }
+
+
+    if(result.winner===HUMAN){
+
+        setTimeout(()=>{
+
+            gameScreen
+            .classList
+            .add("hidden");
+
+            winScreen
+            .classList
+            .remove("hidden");
+
+        },700);
+
+    }else{
+
+        /*
+           If the random computer
+           happens to win, restart.
+        */
+
+        statusElement.textContent=
+        "🤖 Try again!";
+
+        setTimeout(()=>{
+            startGame();
+        },800);
+    }
+}
+
+
+/* ==============================
+   RESTART
+============================== */
+
+function restartGame(){
+
+    startGame();
+}
+
+
+/* ==============================
+   CELEBRATE
+============================== */
+
+function celebrateAndRedirect(){
+
+    createConfetti();
+
+    setTimeout(()=>{
+
+        window.location.href=
+        TIKTOK_URL;
+
+    },2300);
+}
+
+
+/* ==============================
+   CONFETTI
+============================== */
+
+function createConfetti(){
+
+    const symbols=[
+        "🎉",
+        "🎊",
+        "✨",
+        "⭐",
+        "🏆",
+        "💙",
+        "💜",
+        "🔥"
+    ];
+
+
+    for(let i=0;i<120;i++){
+
+        const piece=
+        document.createElement("div");
+
+        piece.className="confetti";
+
+        piece.textContent=
+        symbols[
+            Math.floor(
+                Math.random()*symbols.length
+            )
+        ];
+
+        piece.style.left=
+        Math.random()*100+"vw";
+
+        piece.style.fontSize=
+        (12+Math.random()*20)+"px";
+
+        piece.style.animationDuration=
+        (1.8+Math.random()*2.5)+"s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(()=>{
+            piece.remove();
+        },4500);
+    }
+}
+
+</script>
 
 </body>
 </html>
