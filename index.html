@@ -2,879 +2,1140 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Promax XO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medium Evil Challenge</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-body{
-    min-height:100vh;
-    overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
-    color:white;
-    background:
-        radial-gradient(circle at 15% 15%,#172554,transparent 35%),
-        radial-gradient(circle at 85% 85%,#312e81,transparent 35%),
-        #050816;
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, sans-serif;
+  background: #080808;
+  color: white;
 }
 
-.screen{
-    min-height:100vh;
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.hidden{
-    display:none!important;
+button,
+input {
+  font: inherit;
 }
 
-/* START */
-
-.card{
-    width:min(430px,94vw);
-    padding:42px 28px;
-    text-align:center;
-    border-radius:28px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.14);
-    backdrop-filter:blur(20px);
-    box-shadow:0 25px 80px rgba(0,0,0,.5);
+button {
+  cursor: pointer;
 }
 
-.logo{
-    width:92px;
-    height:92px;
-    margin:0 auto 22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:25px;
-    font-size:43px;
-    background:linear-gradient(135deg,#00e5ff,#7c4dff);
-    box-shadow:0 0 45px rgba(0,229,255,.3);
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 650px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 24px 16px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-h1{
-    font-size:36px;
-    margin-bottom:10px;
+.screen.active {
+  display: flex;
 }
 
-.subtitle{
-    color:#aab4d0;
-    line-height:1.6;
-    margin-bottom:30px;
+/* ================= PASSWORD ================= */
+
+.lock {
+  font-size: 78px;
+  margin-bottom: 5px;
 }
 
-.primary-btn{
-    width:100%;
-    padding:17px;
-    border:0;
-    border-radius:15px;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    background:linear-gradient(135deg,#00c6ff,#7c4dff);
-    box-shadow:0 10px 35px rgba(0,198,255,.2);
-    transition:.2s;
+h1 {
+  text-align: center;
+  font-size: clamp(30px, 8vw, 50px);
+  margin: 8px 0;
 }
 
-.primary-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 40px rgba(124,77,255,.35);
+.subtitle {
+  color: #aaa;
+  text-align: center;
+  margin: 8px 0 24px;
 }
 
-/* PASSWORD */
-
-.password-card{
-    width:min(400px,94vw);
-    padding:35px 28px;
-    text-align:center;
-    border-radius:26px;
-    background:rgba(8,13,32,.92);
-    border:1px solid #29355d;
-    box-shadow:0 25px 70px rgba(0,0,0,.5);
+.password-box {
+  width: min(100%, 360px);
 }
 
-.small-logo{
-    width:70px;
-    height:70px;
-    margin:0 auto 20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:20px;
-    font-size:32px;
-    background:linear-gradient(135deg,#00e5ff,#7c4dff);
+input {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 2px solid #333;
+  border-radius: 14px;
+  outline: none;
+  background: #151515;
+  color: white;
+  text-align: center;
+  font-size: 22px;
 }
 
-.password-card h2{
-    margin-bottom:10px;
+input:focus {
+  border-color: #ff1744;
 }
 
-.password-card p{
-    color:#8994b4;
-    margin-bottom:22px;
+.main-btn,
+.celebrate-btn {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 14px;
+  background: #ff1744;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-input{
-    width:100%;
-    padding:16px;
-    border-radius:13px;
-    border:1px solid #344064;
-    outline:none;
-    background:#080d20;
-    color:white;
-    text-align:center;
-    font-size:16px;
-    margin-bottom:12px;
+.main-btn:active,
+.celebrate-btn:active {
+  transform: scale(.97);
 }
 
-input:focus{
-    border-color:#00e5ff;
-    box-shadow:0 0 15px rgba(0,229,255,.12);
+.error {
+  height: 25px;
+  margin-top: 10px;
+  color: #ff5252;
+  text-align: center;
 }
 
-.error{
-    height:22px;
-    color:#ff5577;
-    font-size:14px;
-    margin-bottom:8px;
+/* ================= MENU ================= */
+
+.game-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
 
-/* GAME */
-
-.game-screen{
-    flex-direction:column;
+.game-card {
+  min-height: 180px;
+  padding: 20px;
+  border: 2px solid #292929;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #191919, #0d0d0d);
+  color: white;
 }
 
-.game-top{
-    width:min(430px,94vw);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
+.game-card:active {
+  transform: scale(.96);
 }
 
-.game-title{
-    font-size:22px;
-    font-weight:bold;
+.game-icon {
+  font-size: 55px;
 }
 
-.turn{
-    padding:8px 13px;
-    border-radius:12px;
-    background:rgba(255,255,255,.08);
-    color:#b9c5e5;
-    font-size:14px;
+.game-name {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.board{
-    width:min(390px,88vw);
-    aspect-ratio:1/1;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    padding:10px;
-    border-radius:25px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    box-shadow:0 20px 70px rgba(0,0,0,.4);
+.game-desc {
+  margin-top: 6px;
+  color: #888;
+  font-size: 13px;
 }
 
-.cell{
-    border:0;
-    border-radius:18px;
-    background:#0b1128;
-    color:white;
-    font-size:clamp(45px,15vw,80px);
-    font-weight:bold;
-    cursor:pointer;
-    transition:.15s;
+.medium {
+  margin-top: 20px;
+  color: #ff1744;
+  font-weight: bold;
 }
 
-.cell:hover:not(.used){
-    background:#121b3d;
-    transform:scale(.97);
+/* ================= GAME ================= */
+
+.game-screen {
+  justify-content: flex-start;
+  padding-top: 18px;
 }
 
-.cell.x{
-    color:#00e5ff;
-    text-shadow:0 0 25px rgba(0,229,255,.6);
+.topbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.cell.o{
-    color:#c084fc;
-    text-shadow:0 0 25px rgba(192,132,252,.6);
+.back-btn {
+  padding: 11px 15px;
+  border: 0;
+  border-radius: 10px;
+  background: #222;
+  color: white;
 }
 
-.cell.win{
-    animation:winning .7s infinite alternate;
+.stats {
+  color: #ccc;
+  font-size: 14px;
+  text-align: right;
 }
 
-@keyframes winning{
-    from{
-        transform:scale(1);
-    }
-    to{
-        transform:scale(1.06);
-        box-shadow:0 0 30px rgba(0,229,255,.4);
-    }
+.game-title {
+  font-size: 30px;
+  text-align: center;
 }
 
-.status{
-    margin-top:17px;
-    color:#aab4d0;
-    text-align:center;
+/* ================= MEMORY ================= */
+
+.memory-grid {
+  width: min(92vw, 450px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
-.reset-btn{
-    margin-top:15px;
-    padding:11px 20px;
-    border-radius:12px;
-    border:1px solid #303d68;
-    background:rgba(255,255,255,.05);
-    color:white;
-    cursor:pointer;
+.memory-tile {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #202020;
+  color: transparent;
+  font-size: 20px;
 }
 
-/* WIN */
-
-.win-card{
-    width:min(450px,94vw);
-    padding:45px 28px;
-    text-align:center;
-    border-radius:30px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.14);
-    backdrop-filter:blur(20px);
+.memory-tile.show {
+  background: #ff1744;
+  color: white;
 }
 
-.trophy{
-    font-size:82px;
-    animation:trophy .8s infinite alternate;
+.memory-tile.correct {
+  background: #126b42;
+  color: white;
 }
 
-@keyframes trophy{
-    from{
-        transform:translateY(0) rotate(-3deg);
-    }
-    to{
-        transform:translateY(-12px) rotate(3deg);
-    }
+.memory-tile.wrong {
+  background: #700018;
 }
 
-.win-card h2{
-    font-size:38px;
-    margin:15px 0 10px;
+/* ================= TARGET ================= */
+
+.target-area {
+  position: relative;
+  width: min(94vw, 520px);
+  height: min(68vh, 480px);
+  min-height: 350px;
+  overflow: hidden;
+  border: 3px solid #333;
+  border-radius: 16px;
+  background: #0c0c0c;
+  touch-action: manipulation;
 }
 
-.celebrate-btn{
-    width:100%;
-    margin-top:25px;
-    padding:17px;
-    border:0;
-    border-radius:15px;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    background:linear-gradient(135deg,#ff4081,#7c4dff);
-    box-shadow:0 10px 35px rgba(255,64,129,.2);
+.target {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  border: 5px solid white;
+  border-radius: 50%;
+  background: #ff1744;
+  box-shadow: 0 0 18px #ff1744;
 }
 
-/* CONFETTI */
+/* ================= WIN ================= */
 
-.confetti{
-    position:fixed;
-    top:-30px;
-    z-index:100;
-    pointer-events:none;
-    animation:fall linear forwards;
+.win-icon {
+  font-size: 85px;
+  animation: bounce .8s infinite alternate;
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(720deg);
-        opacity:0;
-    }
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-15px);
+  }
+}
+
+.win-title {
+  color: #00e676;
+}
+
+.win-message {
+  color: #aaa;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.celebrate-btn {
+  width: min(100%, 360px);
+  margin-top: 20px;
+}
+
+.play-again-btn {
+  width: min(100%, 360px);
+  margin-top: 12px;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #222;
+  color: white;
+  font-weight: bold;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 500px) {
+
+  .screen {
+    padding: 18px 12px;
+  }
+
+  .game-grid {
+    gap: 10px;
+  }
+
+  .game-card {
+    min-height: 160px;
+    padding: 15px;
+  }
+
+  .game-icon {
+    font-size: 45px;
+  }
+
+  .game-name {
+    font-size: 18px;
+  }
+
+  .memory-grid {
+    gap: 6px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- START SCREEN -->
+<!-- ==================================================
+     PASSWORD SCREEN
+================================================== -->
 
-<section id="startScreen" class="screen">
+<section id="passwordScreen" class="screen active">
 
-<div class="card">
+  <div class="lock">🔒</div>
 
-    <div class="logo">❌⭕</div>
+  <h1>EVIL CHALLENGE</h1>
 
-    <h1>Promax XO</h1>
+  <p class="subtitle">
+    Enter the password to continue.
+  </p>
 
-    <p class="subtitle">
-        Think fast. Make your move.
-        Beat the challenge and unlock the celebration.
-    </p>
-
-    <button class="primary-btn" onclick="openPassword()">
-        🚀 START CHALLENGE
-    </button>
-
-</div>
-
-</section>
-
-
-<!-- PASSWORD SCREEN -->
-
-<section id="passwordScreen" class="screen hidden">
-
-<div class="password-card">
-
-    <div class="small-logo">🔐</div>
-
-    <h2>Private Challenge</h2>
-
-    <p>
-        Enter the password to unlock Promax XO.
-    </p>
+  <div class="password-box">
 
     <input
-        id="passwordInput"
-        type="password"
-        placeholder="Enter password"
-        autocomplete="off"
-        onkeydown="if(event.key==='Enter')checkPassword()"
+      id="passwordInput"
+      type="password"
+      inputmode="numeric"
+      maxlength="10"
+      placeholder="Enter password"
+      autocomplete="off"
     >
-
-    <div id="passwordError" class="error"></div>
-
-    <button class="primary-btn" onclick="checkPassword()">
-        🔓 UNLOCK GAME
-    </button>
-
-</div>
-
-</section>
-
-
-<!-- GAME SCREEN -->
-
-<section id="gameScreen" class="screen game-screen hidden">
-
-<div class="game-top">
-
-    <div class="game-title">
-        ❌⭕ Promax XO
-    </div>
-
-    <div id="turnText" class="turn">
-        Your turn
-    </div>
-
-</div>
-
-<div id="board" class="board"></div>
-
-<div id="status" class="status">
-    You are ❌
-</div>
-
-<button class="reset-btn" onclick="restartGame()">
-    ↻ Restart Game
-</button>
-
-</section>
-
-
-<!-- WIN SCREEN -->
-
-<section id="winScreen" class="screen hidden">
-
-<div class="win-card">
-
-    <div class="trophy">🏆</div>
-
-    <h2>You Won!</h2>
-
-    <p class="subtitle">
-        Amazing! You defeated the XO challenge.
-    </p>
 
     <button
-        class="celebrate-btn"
-        onclick="celebrateAndRedirect()"
+      class="main-btn"
+      onclick="checkPassword()"
     >
-        🎉 CLICK & CELEBRATE
+      UNLOCK
     </button>
 
-</div>
+    <div
+      id="passwordError"
+      class="error"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     GAME MENU
+================================================== -->
+
+<section id="menuScreen" class="screen">
+
+  <h1>CHOOSE YOUR GAME 😈</h1>
+
+  <p class="subtitle">
+    Medium Evil Mode
+  </p>
+
+  <div class="game-grid">
+
+    <button
+      class="game-card"
+      onclick="startGame('memory')"
+    >
+
+      <div class="game-icon">🧠</div>
+
+      <div class="game-name">
+        Evil Memory
+      </div>
+
+      <div class="game-desc">
+        Memorize the pattern and reproduce it.
+      </div>
+
+    </button>
+
+
+    <button
+      class="game-card"
+      onclick="startGame('target')"
+    >
+
+      <div class="game-icon">🎯</div>
+
+      <div class="game-name">
+        Target Shooting
+      </div>
+
+      <div class="game-desc">
+        Hit moving targets before time runs out.
+      </div>
+
+    </button>
+
+  </div>
+
+  <div class="medium">
+    ⚠️ DIFFICULTY: MEDIUM ⚠️
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     GAME SCREEN
+================================================== -->
+
+<section
+  id="gameScreen"
+  class="screen game-screen"
+>
+
+  <div class="topbar">
+
+    <button
+      class="back-btn"
+      onclick="backToMenu()"
+    >
+      ← Games
+    </button>
+
+    <div
+      id="stats"
+      class="stats"
+    ></div>
+
+  </div>
+
+  <h2
+    id="gameTitle"
+    class="game-title"
+  ></h2>
+
+
+  <!-- MEMORY GAME -->
+
+  <div
+    id="memoryGame"
+    style="display:none;text-align:center;width:100%"
+  >
+
+    <div
+      id="memoryGrid"
+      class="memory-grid"
+    ></div>
+
+    <p id="memoryMessage">
+      Watch the pattern...
+    </p>
+
+  </div>
+
+
+  <!-- TARGET GAME -->
+
+  <div
+    id="targetGame"
+    style="display:none;text-align:center;width:100%"
+  >
+
+    <div
+      id="targetArea"
+      class="target-area"
+    >
+
+      <button
+        id="target"
+        class="target"
+        aria-label="Target"
+      ></button>
+
+    </div>
+
+    <p>
+      Hit <b>12 targets</b> before time runs out.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     WIN SCREEN
+================================================== -->
+
+<section id="winScreen" class="screen">
+
+  <div class="win-icon">🏆</div>
+
+  <h1 class="win-title">
+    YOU WON!
+  </h1>
+
+  <p class="win-message">
+    You survived Medium Evil Mode! 😈
+  </p>
+
+  <button
+    class="celebrate-btn"
+    onclick="celebrate()"
+  >
+    🎉 CELEBRATE 🎉
+  </button>
+
+  <button
+    class="play-again-btn"
+    onclick="playAgain()"
+  >
+    🔒 PLAY AGAIN
+  </button>
 
 </section>
 
 
 <script>
 
-/* ==============================
+/* ==================================================
    SETTINGS
-============================== */
+================================================== */
 
-const PASSWORD="promax123";
+const PASSWORD = "1234";
 
-const TIKTOK_URL=
-"https://vt.tiktok.com/ZSVN5nW1U/";
+const TIKTOK_URL =
+  "https://vt.tiktok.com/ZSVYwdjXN/";
 
-
-/* ==============================
-   ELEMENTS
-============================== */
-
-const startScreen=
-document.getElementById("startScreen");
-
-const passwordScreen=
-document.getElementById("passwordScreen");
-
-const gameScreen=
-document.getElementById("gameScreen");
-
-const winScreen=
-document.getElementById("winScreen");
-
-const boardElement=
-document.getElementById("board");
-
-const statusElement=
-document.getElementById("status");
-
-const turnElement=
-document.getElementById("turnText");
+let currentGame = null;
 
 
-/* ==============================
-   PASSWORD
-============================== */
+/* ==================================================
+   SCREEN SYSTEM
+================================================== */
 
-function openPassword(){
+function showScreen(id) {
 
-    startScreen.classList.add("hidden");
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen => {
+      screen.classList.remove("active");
+    });
 
-    passwordScreen.classList.remove("hidden");
-
-    setTimeout(()=>{
-        document
-        .getElementById("passwordInput")
-        .focus();
-    },100);
+  document
+    .getElementById(id)
+    .classList.add("active");
 }
 
 
-function checkPassword(){
+/* ==================================================
+   PASSWORD
+================================================== */
 
-    const input=
-    document.getElementById("passwordInput");
+function checkPassword() {
 
-    const error=
+  const input =
+    document.getElementById("passwordInput").value;
+
+  const error =
     document.getElementById("passwordError");
 
-    if(input.value===PASSWORD){
 
-        error.textContent="";
+  if (input === PASSWORD) {
 
-        passwordScreen.classList.add("hidden");
+    error.textContent = "";
 
-        gameScreen.classList.remove("hidden");
+    document
+      .getElementById("passwordInput")
+      .value = "";
 
-        startGame();
+    showScreen("menuScreen");
 
-    }else{
+  } else {
 
-        error.textContent=
-        "❌ Wrong password";
+    error.textContent =
+      "❌ Wrong password";
 
-        input.value="";
+    document
+      .getElementById("passwordInput")
+      .value = "";
 
-        input.animate(
-            [
-                {transform:"translateX(-8px)"},
-                {transform:"translateX(8px)"},
-                {transform:"translateX(-5px)"},
-                {transform:"translateX(0)"}
-            ],
-            {
-                duration:300
-            }
-        );
-    }
+  }
+
 }
 
 
-/* ==============================
-   GAME
-============================== */
+document
+  .getElementById("passwordInput")
+  .addEventListener(
+    "keydown",
+    function(event) {
 
-let board=[];
-let gameActive=true;
+      if (event.key === "Enter") {
+        checkPassword();
+      }
 
-const HUMAN="X";
-const COMPUTER="O";
-
-const winningCombinations=[
-
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-
-    [0,4,8],
-    [2,4,6]
-
-];
+    }
+  );
 
 
-function startGame(){
+/* ==================================================
+   START GAME
+================================================== */
 
-    board=[
-        "","","",
-        "","","",
-        "","",""
-    ];
+function startGame(game) {
 
-    gameActive=true;
+  stopAllGames();
 
-    renderBoard();
+  currentGame = game;
 
-    statusElement.textContent=
-    "Your turn — choose a square.";
+  showScreen("gameScreen");
 
-    turnElement.textContent=
-    "Your turn";
+
+  document
+    .getElementById("memoryGame")
+    .style.display = "none";
+
+  document
+    .getElementById("targetGame")
+    .style.display = "none";
+
+
+  if (game === "memory") {
+
+    document
+      .getElementById("gameTitle")
+      .textContent = "🧠 EVIL MEMORY";
+
+    document
+      .getElementById("memoryGame")
+      .style.display = "block";
+
+    startMemory();
+
+  }
+
+
+  if (game === "target") {
+
+    document
+      .getElementById("gameTitle")
+      .textContent = "🎯 TARGET SHOOTING";
+
+    document
+      .getElementById("targetGame")
+      .style.display = "block";
+
+    startTarget();
+
+  }
+
 }
 
 
-function renderBoard(){
+/* ==================================================
+   WIN
+================================================== */
 
-    boardElement.innerHTML="";
+function winGame() {
 
-    board.forEach((value,index)=>{
+  stopAllGames();
 
-        const cell=
-        document.createElement("button");
+  showScreen("winScreen");
 
-        cell.className="cell";
-
-        if(value){
-
-            cell.textContent=value;
-
-            cell.classList.add(
-                value==="X"?"x":"o"
-            );
-
-            cell.classList.add("used");
-        }
-
-        cell.onclick=()=>{
-            playerMove(index);
-        };
-
-        boardElement.appendChild(cell);
-    });
 }
 
 
-/* ==============================
-   PLAYER
-============================== */
+/* ==================================================
+   PLAY AGAIN
+================================================== */
 
-function playerMove(index){
+function playAgain() {
 
-    if(!gameActive)return;
+  stopAllGames();
 
-    if(board[index]!=="")return;
+  /*
+    Going back to the password screen
+    means the player must enter 1234 again.
+  */
 
-    board[index]=HUMAN;
+  document
+    .getElementById("passwordInput")
+    .value = "";
 
-    renderBoard();
+  document
+    .getElementById("passwordError")
+    .textContent = "";
 
-    const result=checkWinner();
+  showScreen("passwordScreen");
 
-    if(result){
-
-        finishGame(result);
-
-        return;
-    }
-
-    turnElement.textContent=
-    "Computer thinking...";
-
-    statusElement.textContent=
-    "🤖 Computer is thinking...";
-
-    setTimeout(computerMove,350);
 }
 
 
-/* ==============================
-   EASY COMPUTER
-============================== */
-
-function computerMove(){
-
-    if(!gameActive)return;
-
-    const available=
-    board
-    .map((value,index)=>
-        value===""?index:null
-    )
-    .filter(index=>index!==null);
-
-
-    if(available.length===0){
-
-        finishGame("draw");
-
-        return;
-    }
-
-
-    /*
-       EASY MODE
-
-       The computer chooses
-       completely randomly.
-
-       It does NOT block you.
-    */
-
-    const move=
-    available[
-        Math.floor(
-            Math.random()*available.length
-        )
-    ];
-
-
-    board[move]=COMPUTER;
-
-    renderBoard();
-
-    const result=checkWinner();
-
-    if(result){
-
-        finishGame(result);
-
-        return;
-    }
-
-
-    turnElement.textContent=
-    "Your turn";
-
-    statusElement.textContent=
-    "Your turn — choose a square.";
-}
-
-
-/* ==============================
-   WIN CHECK
-============================== */
-
-function checkWinner(){
-
-    for(
-        const combination
-        of winningCombinations
-    ){
-
-        const[a,b,c]=combination;
-
-        if(
-            board[a] &&
-            board[a]===board[b] &&
-            board[a]===board[c]
-        ){
-
-            return{
-                winner:board[a],
-                combination:combination
-            };
-        }
-    }
-
-
-    if(
-        board.every(
-            cell=>cell!==""
-        )
-    ){
-
-        return"draw";
-    }
-
-
-    return null;
-}
-
-
-/* ==============================
-   FINISH
-============================== */
-
-function finishGame(result){
-
-    gameActive=false;
-
-
-    if(result==="draw"){
-
-        statusElement.textContent=
-        "🤝 Draw!";
-
-        setTimeout(()=>{
-            startGame();
-        },700);
-
-        return;
-    }
-
-
-    if(result.combination){
-
-        const cells=
-        boardElement.children;
-
-        result.combination.forEach(index=>{
-
-            cells[index]
-            .classList.add("win");
-
-        });
-    }
-
-
-    if(result.winner===HUMAN){
-
-        setTimeout(()=>{
-
-            gameScreen
-            .classList
-            .add("hidden");
-
-            winScreen
-            .classList
-            .remove("hidden");
-
-        },700);
-
-    }else{
-
-        /*
-           If the random computer
-           happens to win, restart.
-        */
-
-        statusElement.textContent=
-        "🤖 Try again!";
-
-        setTimeout(()=>{
-            startGame();
-        },800);
-    }
-}
-
-
-/* ==============================
-   RESTART
-============================== */
-
-function restartGame(){
-
-    startGame();
-}
-
-
-/* ==============================
+/* ==================================================
    CELEBRATE
-============================== */
+================================================== */
 
-function celebrateAndRedirect(){
+function celebrate() {
 
-    createConfetti();
+  window.location.href =
+    TIKTOK_URL;
 
-    setTimeout(()=>{
-
-        window.location.href=
-        TIKTOK_URL;
-
-    },2300);
 }
 
 
-/* ==============================
-   CONFETTI
-============================== */
+/* ==================================================
+   BACK TO MENU
+================================================== */
 
-function createConfetti(){
+function backToMenu() {
 
-    const symbols=[
-        "🎉",
-        "🎊",
-        "✨",
-        "⭐",
-        "🏆",
-        "💙",
-        "💜",
-        "🔥"
-    ];
+  stopAllGames();
+
+  /*
+    Going back to menu does not require
+    another password because the player
+    is still inside the current session.
+  */
+
+  showScreen("menuScreen");
+
+}
 
 
-    for(let i=0;i<120;i++){
+function updateStats(text) {
 
-        const piece=
-        document.createElement("div");
+  document
+    .getElementById("stats")
+    .textContent = text;
 
-        piece.className="confetti";
+}
 
-        piece.textContent=
-        symbols[
-            Math.floor(
-                Math.random()*symbols.length
-            )
-        ];
 
-        piece.style.left=
-        Math.random()*100+"vw";
+/* ==================================================
+   EVIL MEMORY
+   MEDIUM DIFFICULTY
+================================================== */
 
-        piece.style.fontSize=
-        (12+Math.random()*20)+"px";
+const memoryGrid =
+  document.getElementById("memoryGrid");
 
-        piece.style.animationDuration=
-        (1.8+Math.random()*2.5)+"s";
+const memoryMessage =
+  document.getElementById("memoryMessage");
 
-        document.body.appendChild(piece);
+let memorySequence = [];
+let memoryStep = 0;
+let memoryRound = 1;
+let memoryTimer = null;
 
-        setTimeout(()=>{
-            piece.remove();
-        },4500);
+
+function startMemory() {
+
+  memoryRound = 1;
+
+  createMemoryRound();
+
+}
+
+
+function createMemoryRound() {
+
+  clearTimeout(memoryTimer);
+
+  memoryGrid.innerHTML = "";
+
+  memoryStep = 0;
+
+  const totalTiles = 16;
+
+  /*
+    Medium:
+
+    Round 1 = 3 tiles
+    Round 2 = 4 tiles
+    Round 3 = 5 tiles
+    Round 4 = 6 tiles
+  */
+
+  const sequenceLength =
+    2 + memoryRound;
+
+  memorySequence = [];
+
+
+  while (
+    memorySequence.length <
+    sequenceLength
+  ) {
+
+    const index =
+      Math.floor(
+        Math.random() * totalTiles
+      );
+
+    if (
+      !memorySequence.includes(index)
+    ) {
+
+      memorySequence.push(index);
+
     }
+
+  }
+
+
+  const buttons = [];
+
+
+  for (
+    let i = 0;
+    i < totalTiles;
+    i++
+  ) {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "memory-tile";
+
+    button.textContent = "◆";
+
+    button.onclick =
+      function() {
+
+        memoryClick(
+          i,
+          button
+        );
+
+      };
+
+    memoryGrid.appendChild(button);
+
+    buttons.push(button);
+
+  }
+
+
+  updateStats(
+    "Round " +
+    memoryRound +
+    " / 4"
+  );
+
+
+  memoryMessage.textContent =
+    "👀 Memorize the red tiles!";
+
+
+  memorySequence.forEach(
+    index => {
+
+      buttons[index]
+        .classList
+        .add("show");
+
+    }
+  );
+
+
+  memoryTimer =
+    setTimeout(
+      function() {
+
+        buttons.forEach(
+          button => {
+
+            button
+              .classList
+              .remove("show");
+
+          }
+        );
+
+        memoryMessage.textContent =
+          "😈 Reproduce the pattern!";
+
+      },
+      1400
+    );
+
+}
+
+
+function memoryClick(
+  index,
+  button
+) {
+
+  if (
+    button
+      .classList
+      .contains("correct")
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    index ===
+    memorySequence[memoryStep]
+  ) {
+
+    button
+      .classList
+      .add("correct");
+
+    memoryStep++;
+
+
+    if (
+      memoryStep ===
+      memorySequence.length
+    ) {
+
+      if (
+        memoryRound >= 4
+      ) {
+
+        winGame();
+
+      } else {
+
+        memoryRound++;
+
+        memoryMessage.textContent =
+          "✅ Correct! Next round...";
+
+        setTimeout(
+          createMemoryRound,
+          700
+        );
+
+      }
+
+    }
+
+  } else {
+
+    button
+      .classList
+      .add("wrong");
+
+    memoryMessage.textContent =
+      "❌ Wrong! Try this round again.";
+
+    setTimeout(
+      createMemoryRound,
+      800
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   TARGET SHOOTING
+   MEDIUM DIFFICULTY
+================================================== */
+
+const target =
+  document.getElementById("target");
+
+const targetArea =
+  document.getElementById("targetArea");
+
+let targetScore = 0;
+let targetTime = 25;
+let targetTimer = null;
+let targetMoveTimer = null;
+
+
+function startTarget() {
+
+  targetScore = 0;
+
+  targetTime = 25;
+
+  moveTarget();
+
+  updateTargetStats();
+
+
+  targetMoveTimer =
+    setInterval(
+      moveTarget,
+      900
+    );
+
+
+  targetTimer =
+    setInterval(
+      function() {
+
+        targetTime--;
+
+        updateTargetStats();
+
+
+        if (
+          targetTime <= 0
+        ) {
+
+          stopTarget();
+
+          alert(
+            "⏰ Time's up! Try again."
+          );
+
+          startTarget();
+
+        }
+
+      },
+      1000
+    );
+
+}
+
+
+function updateTargetStats() {
+
+  updateStats(
+    "Hits: " +
+    targetScore +
+    " / 12 | Time: " +
+    targetTime
+  );
+
+}
+
+
+function moveTarget() {
+
+  const maxX =
+    targetArea.clientWidth - 62;
+
+  const maxY =
+    targetArea.clientHeight - 62;
+
+
+  const x =
+    Math.random() *
+    Math.max(1, maxX);
+
+  const y =
+    Math.random() *
+    Math.max(1, maxY);
+
+
+  target.style.left =
+    x + "px";
+
+  target.style.top =
+    y + "px";
+
+}
+
+
+target.addEventListener(
+  "click",
+  function(event) {
+
+    event.stopPropagation();
+
+    targetScore++;
+
+    updateTargetStats();
+
+
+    if (
+      targetScore >= 12
+    ) {
+
+      winGame();
+
+      return;
+
+    }
+
+
+    moveTarget();
+
+  }
+);
+
+
+function stopTarget() {
+
+  clearInterval(targetTimer);
+
+  clearInterval(targetMoveTimer);
+
+  targetTimer = null;
+
+  targetMoveTimer = null;
+
+}
+
+
+/* ==================================================
+   STOP ALL GAMES
+================================================== */
+
+function stopAllGames() {
+
+  clearTimeout(memoryTimer);
+
+  memoryTimer = null;
+
+  stopTarget();
+
 }
 
 </script>
