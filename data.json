@@ -35,6 +35,21 @@
   "tasks": {},
   "transactions": [],
   "users": {
+    "7627790906": {
+      "blocked_until": null,
+      "created_at": "2026-09-18T15:43:12.055179+00:00",
+      "earned_points": 0,
+      "first_name": "𝓛𝓲𝓳_𝓡𝓪𝓯𝓲",
+      "fraud_attempts": 0,
+      "last_activity": "2026-09-18T15:43:12.055189+00:00",
+      "points": 0,
+      "referral_status": null,
+      "referred_by": null,
+      "spent_points": 0,
+      "status": "active",
+      "user_id": 7627790906,
+      "username": "Lij_Rafi"
+    },
     "8725727597": {
       "blocked_until": null,
       "created_at": "2026-09-18T14:54:16.296807+00:00",
