@@ -49,6 +49,21 @@
       "status": "active",
       "user_id": 8725727597,
       "username": "n_1tcs0z7"
+    },
+    "8926268607": {
+      "blocked_until": null,
+      "created_at": "2026-09-18T15:02:04.751462+00:00",
+      "earned_points": 0,
+      "first_name": "Addis",
+      "fraud_attempts": 0,
+      "last_activity": "2026-09-18T15:02:04.751471+00:00",
+      "points": 0,
+      "referral_status": null,
+      "referred_by": null,
+      "spent_points": 0,
+      "status": "active",
+      "user_id": 8926268607,
+      "username": "FREENJ8"
     }
   }
 }
